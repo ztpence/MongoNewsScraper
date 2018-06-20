@@ -9,7 +9,7 @@ const logger = require("morgan");
 
 const db = require('./models');
 
-let PORT = 5000;
+let PORT = 8080;
 
 const app = express();
 
@@ -19,7 +19,7 @@ const app = express();
 app.use(logger("dev"));
 // Use body-parser for handling form submissions
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.jason());
+app.use(bodyParser.json());
 // Use express.static to serve the public folder as a static directory
 app.use(express.static("public"));
 
@@ -37,6 +37,25 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI);
+
+//Routes
+app.get('/', function(req, res){
+    res.render('index')
+});
+
+
+
+
+
+
+
+
+
+// Starting the server
+app.listen(PORT, function(){
+    console.log('Running on PORT: ' + PORT);
+});
+
 
 
 
